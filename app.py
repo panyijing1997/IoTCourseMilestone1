@@ -12,12 +12,16 @@ GPIO.output(4, GPIO.LOW)  # initially turned off
 
 @app.route("/")
 def index():
+    return render_template('index.html')
+
+@app.route("/led")
+def led():
     ledState = GPIO.input(4)
     templateData = {
         'title': 'GPIO #4 output State!',
         'led': ledState,
     }
-    return render_template('index.html', **templateData)
+    return render_template('ledControl.html', **templateData)
 
 
 @app.route('/led/<action>')
@@ -30,7 +34,7 @@ def ledAction(action):
     templateData = {
         'led': ledState,
     }
-    return render_template('index.html', **templateData)
+    return render_template('ledControl.html', **templateData)
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, debug=True)
 
