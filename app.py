@@ -76,13 +76,11 @@ def ledAction(action):
         'led': ledState,
     }
     return render_template('ledControl.html', **templateData)
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080, debug=True)
 
-@app.route("/dist")
+@app.route("/distance")
 def dist():
     GPIO.output(TRIG, True)
-    time.sleep(0.0001)
+    time.sleep(0.001)
     GPIO.output(TRIG, False)
     while GPIO.input(ECHO) == 0:
         pulse_start = time.time()
@@ -92,7 +90,12 @@ def dist():
     distance = pulse_duration * 17150
     distance = round(distance, 2)
     templateData={
-        dist : "distance"
+        'dist':distance
     }
-    GPIO.cleanup()
     return render_template('distance.html', **templateData)
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8080, debug=True)
+
+
