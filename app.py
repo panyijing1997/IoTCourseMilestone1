@@ -15,7 +15,11 @@ GPIO.setup(4, GPIO.OUT)  # set #4 as ouput port
 GPIO.output(4, GPIO.LOW)  # initially turned off
 
     # Initial the dht device, with data pin connected to:
-
+#set ports for distance sensor
+TRIG=23
+ECHO=24
+GPIO.setup(TRIG,GPIO.OUT)
+GPIO.setup(ECHO,GPIO.IN)
 #instance = dht11.DHT11(pin=12)
 
 @app.route("/")
@@ -75,3 +79,20 @@ def ledAction(action):
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, debug=True)
 
+@app.route("/dist")
+def dist():
+    GPIO.output(TRIG, True)
+    time.sleep(0.0001)
+    GPIO.output(TRIG, False)
+    while GPIO.input(ECHO) == 0:
+        pulse_start = time.time()
+    while GPIO.input(ECHO) == 1:
+        pulse_end = time.time()
+    pulse_duration = pulse_end - pulse_start
+    distance = pulse_duration * 17150
+    distance = round(distance, 2)
+    templateData={
+        dist : "distance"
+    }
+    GPIO.cleanup()
+    return render_template('distance.html', **templateData)
