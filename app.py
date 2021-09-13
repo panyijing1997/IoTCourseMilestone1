@@ -5,7 +5,8 @@ import adafruit_dht
 import time
 import dht11
 import datetime
-
+import sqlite3
+db_file = 'IoTmileston1DB.db'
 app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -30,29 +31,58 @@ def index():
 def dht():
 
     dhtDevice = adafruit_dht.DHT11(board.D12,use_pulseio=False)
+    msg = "failed to read the sensor, showing the newest record from the database"
     try:
         temperature = dhtDevice.temperature
         humidity = dhtDevice.humidity
         if humidity is not None and temperature is not None:
+            msg="read from the sensor successfully"
             humidity = '{0:0.1f}'.format(humidity)
             temperature = '{0:0.1f}'.format(temperature)
             templateData={
                 'temperature':temperature,
                 'humidity': humidity,
+                'msg':msg
            }
+            conn = sqlite3.connect(db_file)
+            cur = conn.cursor()
+            timestamp=str(time.time())
+            sql = 'insert into history_data(temperature, humidity, create_time) values(?,?,?)'
+            data = (temperature, humidity, timestamp)
+            cur.execute(sql, data)
+            conn.commit()
+            conn.close()
     except RuntimeError as error:
         # Errors happen fairly often, DHT's are hard to read, just keep going
+
         dhtDevice.exit()
+        conn = sqlite3.connect(db_file)
+        cur = conn.cursor()
+        newestData = cur.execute("select * from history_data order by id desc")
+        for data in newestData:
+            temperature = data[1]
+            humidity = data[2]
+
         templateData={
-            'temperature':"failed to read",
-            'humidity': "failed to read",
+            'temperature': temperature,
+            'humidity': humidity,
+            'msg':msg
         }
+        conn.close()
     except Exception as error:
         dhtDevice.exit()
+        conn = sqlite3.connect(db_file)
+        cur = conn.cursor()
+        newestData = cur.execute("select * from history_data order by id desc")
+        for data in newestData:
+            temperature = data[1]
+            humidity = data[2]
         templateData={
-            'temperature':"failed to read",
-            'humidity': "failed to read",
+            'temperature': temperature,
+            'humidity': humidity,
+            'msg': msg
         }
+        conn.close()
     return render_template('dht11.html',**templateData)
 
 @app.route("/historyData")
