@@ -53,7 +53,7 @@ def dht():
             'temperature':"failed to read",
             'humidity': "failed to read",
         }
-    return render_template('dht11.html',**templateData)
+    return render_template('index.html',**templateData)
     
 @app.route("/led")
 def led():
@@ -62,7 +62,7 @@ def led():
         'title': 'GPIO #4 output State!',
         'led': ledState,
     }
-    return render_template('ledControl.html', **templateData)
+    return render_template('index.html', **templateData)
 
 
 @app.route('/led/<action>')
@@ -75,7 +75,7 @@ def ledAction(action):
     templateData = {
         'led': ledState,
     }
-    return render_template('ledControl.html', **templateData)
+    return render_template('index.html', **templateData)
 
 @app.route("/distance")
 def dist():
