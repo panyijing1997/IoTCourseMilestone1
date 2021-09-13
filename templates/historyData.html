@@ -128,18 +128,4 @@
 		</div>
 </body>
 
-<script>
-    //获取元素
-     var tbody = document.getElementsByTagName('tbody');
-     var json  = [{TEMPERATURE:27.5, HUMIDITY: 30, CREATETIME:'2021-07-21 01:01:01'}];
-     for(var i=0;i<json.length;i++){
-    //创建新的tr（newTr）
-      var newTr=document.createElement('tr');
-             //添加tr里的内容
-             newTr.innerHTML = '<td>'+json[i].TEMPERATURE+'</td><td>'+json[i].HUMIDITY+'</td><td>' + json[i].CREATETIME + '</td>'
-             //把新的tr(newTr)加入到tbody中
-             tbody[0].appendChild(newTr);
-     }
-</script>
-
 </html>
