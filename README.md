@@ -14,6 +14,12 @@
 
 `sudo pip3 install adafruit-circuitpython-dht`
 
+### 3. Lauch the server
+ 
+ `python3 app.py`
+ 
+ port: 8080
+
 If you run into error of "module board has no attribute D12", please do the following command:
 
 `pip3 uninstall board`
