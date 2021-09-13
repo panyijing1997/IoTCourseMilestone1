@@ -53,7 +53,7 @@ def dht():
             'temperature':"failed to read",
             'humidity': "failed to read",
         }
-    return render_template('index.html',**templateData)
+    return render_template('dht11.html',**templateData)
     
 @app.route("/led")
 def led():

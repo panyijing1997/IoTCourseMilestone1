@@ -34,12 +34,18 @@
                         <div class="main-header__inner">
                             <h1 class="main-header__title">Temperature & Humidity</h1>
                             <div class="main-header__subtitle">
+                                <p class="lsvr-wordbench-slider__item-button">
+									<a href="/dht11"><button  class="lsvr-button lsvr-wordbench-slider__item-button-link">Refresh</button></a>
+								</p>
                                 <p>DHT11 errors happens frequently. If the reading is failed, please wait for a few seconds and try again
                                 </p>
                                 <p>Temperature: {{ temperature }} C
                                 </p>
                                 <p>Humidity: {{ humidity }} %
                                 </p>
+                                <p class="lsvr-wordbench-slider__item-button">
+									<a href="/"><button  class="lsvr-button lsvr-wordbench-slider__item-button-link">Back to main page</button></a>
+								</p>
                             </div>
                         </div>
 			</header>
