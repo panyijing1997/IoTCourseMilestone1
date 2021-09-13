@@ -6,6 +6,8 @@ import time
 import dht11
 import datetime
 import sqlite3
+from time import strftime, localtime
+
 db_file = 'IoTmileston1DB.db'
 app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
@@ -46,7 +48,7 @@ def dht():
            }
             conn = sqlite3.connect(db_file)
             cur = conn.cursor()
-            timestamp=str(time.time())
+            timestamp=strftime('%Y-%m-%d %H:%M:%S', localtime())
             sql = 'insert into history_data(temperature, humidity, create_time) values(?,?,?)'
             data = (temperature, humidity, timestamp)
             cur.execute(sql, data)
@@ -58,7 +60,7 @@ def dht():
         dhtDevice.exit()
         conn = sqlite3.connect(db_file)
         cur = conn.cursor()
-        newestData = cur.execute("select * from history_data order by id desc")
+        newestData = cur.execute("select * from history_data order by id desc limit 1")
         for data in newestData:
             temperature = data[1]
             humidity = data[2]
@@ -73,7 +75,7 @@ def dht():
         dhtDevice.exit()
         conn = sqlite3.connect(db_file)
         cur = conn.cursor()
-        newestData = cur.execute("select * from history_data order by id desc")
+        newestData = cur.execute("select * from history_data order by id desc limit 1")
         for data in newestData:
             temperature = data[1]
             humidity = data[2]
