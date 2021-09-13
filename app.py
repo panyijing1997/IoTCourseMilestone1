@@ -89,7 +89,17 @@ def dht():
 
 @app.route("/historyData")
 def histiryData():
-    return render_template('historyData.html')
+    conn = sqlite3.connect(db_file)
+    cur = conn.cursor()
+    history_data = cur.execute("select * from history_data order by id")
+    history_data_list = []
+    for data in history_data:
+        history_data_list.append(data)
+    conn.close()
+    templateData = {
+        'list': history_data_list
+    }
+    return render_template('historyData.html', **templateData)
 
 @app.route("/led")
 def led():
