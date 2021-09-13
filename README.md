@@ -1,12 +1,12 @@
 # IoTCourseMilestone1
 
-##Set up
+## Set up
 
-###1. Install **SQLite** on RaspberryPi
+### 1. Install **SQLite** on RaspberryPi
 
  `sudo apt install sqlite3`
 
-###2. Install python dependencies
+### 2. Install python dependencies
 
 `sudo pip3 install datetime3`
 
