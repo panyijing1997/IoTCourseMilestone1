@@ -54,7 +54,11 @@ def dht():
             'humidity': "failed to read",
         }
     return render_template('dht11.html',**templateData)
-    
+
+@app.route("/historyData")
+def histiryData():
+    return render_template('historyData.html')
+
 @app.route("/led")
 def led():
     ledState = GPIO.input(4)
