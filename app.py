@@ -91,7 +91,7 @@ def dht():
 def histiryData():
     conn = sqlite3.connect(db_file)
     cur = conn.cursor()
-    history_data = cur.execute("select * from history_data order by id")
+    history_data = cur.execute("select * from history_data order by id desc")
     history_data_list = []
     for data in history_data:
         history_data_list.append(data)
