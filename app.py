@@ -97,7 +97,7 @@ def histiryData():
         history_data_list.append(data)
     conn.close()
     templateData = {
-        'list': history_data_list
+        'histroyData': history_data_list
     }
     return render_template('historyData.html', **templateData)
 
