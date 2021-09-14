@@ -8,8 +8,6 @@
 
 ### 2. Install python dependencies
 
-`sudo pip3 install datetime3`
-
 `sudo pip3 install flask`
 
 `sudo pip3 install adafruit-circuitpython-dht`
