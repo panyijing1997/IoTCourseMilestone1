@@ -143,7 +143,7 @@ def dist():
     conn = sqlite3.connect(db_file)
     cur = conn.cursor()
     timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
-    sql = 'insert into history_distance(distance, create_time) values(?,?,?)'
+    sql = 'insert into history_distance(distance, create_time) values(?,?)'
     data = (distance, timestamp)
     cur.execute(sql, data)
     conn.commit()
