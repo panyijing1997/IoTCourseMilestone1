@@ -37,8 +37,8 @@ def dht():
         humidity = dhtDevice.humidity
         if humidity is not None and temperature is not None:
             msg="read from the sensor successfully"
-            humidity = '{0:01.1f}'.format(humidity)
-            temperature = '{0:01.1f}'.format(temperature)
+            #humidity = '{0:01.1f}'.format(humidity)
+            #temperature = '{0:01.1f}'.format(temperature)
             templateData={
                 'temperature':temperature,
                 'humidity': humidity,
