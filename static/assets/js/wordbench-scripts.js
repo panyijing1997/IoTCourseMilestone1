@@ -1776,7 +1776,7 @@ $(document).ready( function() {
 	LSVR STYLE SWITCHER
 
 ----------------------------------------------------------------------------- */
-
+/*
 (function($){ "use strict";
 $(document).ready( function() {
 
@@ -1833,3 +1833,5 @@ $(document).ready( function() {
 
 });
 })(jQuery);
+
+ */
