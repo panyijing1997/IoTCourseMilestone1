@@ -15,17 +15,19 @@ GPIO.setwarnings(False)
 GPIO.setup(4, GPIO.OUT)  # set #4 as ouput port
 GPIO.output(4, GPIO.LOW)  # initially turned off
 
-    # Initial the dht device, with data pin connected to:
 #set ports for distance sensor
 TRIG=23
 ECHO=24
 GPIO.setup(TRIG,GPIO.OUT)
 GPIO.setup(ECHO,GPIO.IN)
-#instance = dht11.DHT11(pin=12)
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    ledState = GPIO.input(4)
+    templateData = {
+        'led': ledState,
+    }
+    return render_template('index.html', **templateData)
 
 @app.route("/dht11")
 def dht():
@@ -37,8 +39,6 @@ def dht():
         humidity = dhtDevice.humidity
         if humidity is not None and temperature is not None:
             msg="read from the sensor successfully"
-            #humidity = '{0:01.1f}'.format(humidity)
-            #temperature = '{0:01.1f}'.format(temperature)
             templateData={
                 'temperature':temperature,
                 'humidity': humidity,
@@ -103,7 +103,6 @@ def histiryData():
 def led():
     ledState = GPIO.input(4)
     templateData = {
-        'title': 'GPIO #4 output State!',
         'led': ledState,
     }
     return render_template('index.html', **templateData)
@@ -111,6 +110,7 @@ def led():
 
 @app.route('/led/<action>')
 def ledAction(action):
+
     if action == "on":
         GPIO.output(4, GPIO.HIGH)
     if action == "off":
