@@ -32,22 +32,43 @@
 			</div>
 			<header class="main-header">
                         <div class="main-header__inner">
-                            <h1 class="main-header__title">Distance</h1>
+                            <h1 class="main-header__title">Distance Measuring</h1>
                             <div class="main-header__subtitle">
-                                <p class="lsvr-wordbench-slider__item-button">
-									<a href="/distance"><button  class="lsvr-button lsvr-wordbench-slider__item-button-link">Measure again</button></a>
-								</p>
-                                <p class="lsvr-wordbench-slider__item-button">
-									<a href="/distHistoryData"><button  class="lsvr-button lsvr-wordbench-slider__item-button-link">History Data</button></a>
-                                <p>The distance from the object in front of the distance sensor: {{ dist }} cm
+                                <p>In this section you can <strong> see the newest 30 history records about distance measuring</strong>.
+                                    The data is displayed in the table below.
+                                </p>
                                 <p class="lsvr-wordbench-slider__item-button">
 									<a href="/"><button  class="lsvr-button lsvr-wordbench-slider__item-button-link">Back to main page</button></a>
+								</p>
+                                <p class="lsvr-wordbench-slider__item-button">
+									<a href="/distance"><button  class="lsvr-button lsvr-wordbench-slider__item-button-link">Measure Distance Again</button></a>
 								</p>
                             </div>
                         </div>
 			</header>
             <div class="col-md-12 mt">
+             <div class="content-panel">
+              <table class="table table-hover">
+                <hr>
+                <thead>
+                  <tr>
+                      <th>ID</th>
+                    <th>Distance</th>
+                    <th>CreateTime</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for item in historyData %}
+                <tr>
+                    <td>{{ item[0] }} </td>
+                    <td>{{ item[1] }} cm</td>
+                    <td>{{ item[2] }}</td>
 
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
           </div>
 
             <!-- FOOTER : begin -->
@@ -112,19 +133,5 @@
 			</header>
 		</div>
 </body>
-
-<script>
-    //获取元素
-     var tbody = document.getElementsByTagName('tbody');
-     var json  = [{TEMPERATURE:27.5, HUMIDITY: 30, CREATETIME:'2021-07-21 01:01:01'}];
-     for(var i=0;i<json.length;i++){
-    //创建新的tr（newTr）
-      var newTr=document.createElement('tr');
-             //添加tr里的内容
-             newTr.innerHTML = '<td>'+json[i].TEMPERATURE+'</td><td>'+json[i].HUMIDITY+'</td><td>' + json[i].CREATETIME + '</td>'
-             //把新的tr(newTr)加入到tbody中
-             tbody[0].appendChild(newTr);
-     }
-</script>
 
 </html>

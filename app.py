@@ -138,10 +138,31 @@ def dist():
     distance = pulse_duration * 17150
     distance = round(distance, 2)
     templateData={
-        'dist':distance
+        'dist':distance,
     }
+    conn = sqlite3.connect(db_file)
+    cur = conn.cursor()
+    timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+    sql = 'insert into history_distance(distance, create_time) values(?,?,?)'
+    data = (distance, timestamp)
+    cur.execute(sql, data)
+    conn.commit()
+    conn.close()
     return render_template('distance.html', **templateData)
 
+@app.route("/distHistoryData")
+def distHist():
+    conn = sqlite3.connect(db_file)
+    cur = conn.cursor()
+    history_data = cur.execute("select * from history_distance order by id desc limit 30")
+    history_data_list = []
+    for data in history_data:
+        history_data_list.append(data)
+    conn.close()
+    templateData = {
+        'historyData': history_data_list
+    }
+    return render_template('distHistoryData.html', **templateData)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, debug=True)
