@@ -85,11 +85,11 @@ def dht():
         conn.close()
     return render_template('dht11.html',**templateData)
 
-@app.route("/historyData")
+@app.route("/tempHistoryData")
 def histiryData():
     conn = sqlite3.connect(db_file)
     cur = conn.cursor()
-    history_data = cur.execute("select * from history_data order by id desc limit 30")
+    history_data = cur.execute("select * from history_temperature_humidity order by id desc limit 30")
     history_data_list = []
     for data in history_data:
         history_data_list.append(data)
