@@ -3,10 +3,8 @@ import RPi.GPIO as GPIO
 import board
 import adafruit_dht
 import time
-import dht11
-import datetime
 import sqlite3
-from time import strftime, localtime
+
 
 db_file = 'IoTmileston1DB.db'
 app = Flask(__name__)
@@ -48,7 +46,7 @@ def dht():
            }
             conn = sqlite3.connect(db_file)
             cur = conn.cursor()
-            timestamp=strftime('%Y-%m-%d %H:%M:%S', localtime())
+            timestamp=time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
             sql = 'insert into history_data(temperature, humidity, create_time) values(?,?,?)'
             data = (temperature, humidity, timestamp)
             cur.execute(sql, data)
@@ -91,7 +89,7 @@ def dht():
 def histiryData():
     conn = sqlite3.connect(db_file)
     cur = conn.cursor()
-    history_data = cur.execute("select * from history_data order by id desc")
+    history_data = cur.execute("select * from history_data order by id desc limit 30")
     history_data_list = []
     for data in history_data:
         history_data_list.append(data)
@@ -99,7 +97,7 @@ def histiryData():
     templateData = {
         'historyData': history_data_list
     }
-    return render_template('historyData.html', **templateData)
+    return render_template('tempHistoryData.html', **templateData)
 
 @app.route("/led")
 def led():
