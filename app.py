@@ -47,7 +47,7 @@ def dht():
             conn = sqlite3.connect(db_file)
             cur = conn.cursor()
             timestamp=time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
-            sql = 'insert into history_data(temperature, humidity, create_time) values(?,?,?)'
+            sql = 'insert into history_temperature_humidity(temperature, humidity, create_time) values(?,?,?)'
             data = (temperature, humidity, timestamp)
             cur.execute(sql, data)
             conn.commit()
@@ -58,7 +58,7 @@ def dht():
         dhtDevice.exit()
         conn = sqlite3.connect(db_file)
         cur = conn.cursor()
-        newestData = cur.execute("select * from history_data order by id desc limit 1")
+        newestData = cur.execute("select * from history_temperature_humidity order by id desc limit 1")
         for data in newestData:
             temperature = data[1]
             humidity = data[2]
@@ -73,7 +73,7 @@ def dht():
         dhtDevice.exit()
         conn = sqlite3.connect(db_file)
         cur = conn.cursor()
-        newestData = cur.execute("select * from history_data order by id desc limit 1")
+        newestData = cur.execute("select * from history_temperature_humidity order by id desc limit 1")
         for data in newestData:
             temperature = data[1]
             humidity = data[2]
