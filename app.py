@@ -6,7 +6,7 @@ import time
 import sqlite3
 
 
-db_file = 'IoTmileston1DB.db'
+db_file = 'IoTMilestone1DB.db'
 app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
