@@ -7,12 +7,12 @@
  $ sudo apt install sqlite3
 ```
 ### 2. Install python dependencies
+```shell
 
-`sudo pip3 install datetime3`
+$ sudo pip3 install flask
 
-`sudo pip3 install flask`
-
-`sudo pip3 install adafruit-circuitpython-dht`
+$ sudo pip3 install adafruit-circuitpython-dht
+```
 
 ### 3. Clone this repo:
 
