@@ -8,19 +8,16 @@
 ```
 ### 2. Install python dependencies
 ```shell
-
 $ sudo pip3 install flask
-
 $ sudo pip3 install adafruit-circuitpython-dht
 ```
-
 ### 3. Clone this repo:
-
-`git clone https://gitlab.au.dk/au671364/iotcourse.git`
-
+```shell
+$ git clone https://gitlab.au.dk/au671364/iotcourse.git
+```
 ### 3. Lauch the server
- 
- `python3 app.py`
+ ```shell
+ $ python3 app.py`
  
  port: 8080
 
