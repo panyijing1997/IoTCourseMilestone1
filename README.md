@@ -22,7 +22,6 @@ $ git clone https://gitlab.au.dk/au671364/iotcourse.git
 If you run into error of "module board has no attribute D12", please do the following command:
 ```shell
 $ pip3 uninstall board
-
 $ pip3 install adafruit-blinka
 ```
 Then visit `[your RPi's ip address]:8080` in broswer
