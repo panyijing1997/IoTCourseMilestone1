@@ -25,4 +25,4 @@ $ pip3 uninstall board
 
 $ pip3 install adafruit-blinka
 ```
-Visit `[your RPi's ip address]:8080` in broswer
+Then visit `http://[your RPi's ip address]:8080` in broswer
