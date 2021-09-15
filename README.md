@@ -1,5 +1,9 @@
 # # IoTCourseMilestone1
 
+## Connection
+![](./img/c.png)
+
+
 ## Set up
 
 ### 1. Install **SQLite** on RaspberryPi
