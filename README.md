@@ -17,14 +17,14 @@ $ git clone https://gitlab.au.dk/au671364/iotcourse.git
 ```
 ### 3. Lauch the server
  ```shell
- $ python3 app.py`
- 
+ $ python3 app.py
+ ```
  port: 8080
 
 If you run into error of "module board has no attribute D12", please do the following command:
+```shell
+$ pip3 uninstall board
 
-`pip3 uninstall board`
-
-`pip3 install adafruit-blinka`
-
+$ pip3 install adafruit-blinka
+```
 
